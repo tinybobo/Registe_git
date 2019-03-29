@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>LOGIN</title>
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+    <div>
+        {% csrf_token %}
+        name:<input type="text" id = "in1" name="name"/></br>
+        age:<input type="text" id = "in2" name="age"/></br>
+        <input type="submit" id="button1" value="Submit">
+    </div>
+</body>
+
+
+<script>
+$(document).ready(function () {
+
+    $("#button1").click(function (event) {
+
+        event.preventDefault()
+
+        if($('#in1').val()!="" && $('#in2').val()!="")
+
+            alert("name:" + $('#in1').val() + "age:" + $('#in2').val())
+        else
+            alert("姓名或年龄不能为空!")
+        var data = {
+            "name": $('#in1').val(),
+            "age": $('#in2').val(),
+            "csrfmiddlewaretoken": '{{ csrf_token }}'
+        }
+
+        $.post("", data, function(data, status){
+                alert(data + status)
+                location.reload()
+            })
+    })
+
+})
+</script>
+
+
+</html>
